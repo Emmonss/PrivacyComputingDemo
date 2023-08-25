@@ -40,7 +40,9 @@ def invert(a,b):
         return int x where a*x ==1 mod b
     '''
     x = int(gmpy2.invert(a,b))
-    assert x == 0, ZeroDivisionError('invert not inverse exists')
+    assert x != 0, ZeroDivisionError('invert not inverse exists')
+
+    return x
 
 def crt_coefficient(p,q):
     tq = gmpy2.invert(p,q)

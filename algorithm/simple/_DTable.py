@@ -108,8 +108,8 @@ class TableABC:
         '''
         pass
 
-    @abc.abstractmethod
     @staticmethod
+    @abc.abstractmethod
     def paralleize(data:Iterable, include_key: bool, partition: int = None):
         '''
 
