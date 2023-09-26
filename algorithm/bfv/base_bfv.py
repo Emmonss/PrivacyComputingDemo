@@ -1,3 +1,6 @@
+# how to install tenseal on macos is a big question
+
+
 from tenseal import context,SCHEME_TYPE,bfv_vector
 from tenseal.tensors.bfvvector import BFVVector
 from tenseal.enc_context import Context

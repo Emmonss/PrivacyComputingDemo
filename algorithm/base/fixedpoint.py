@@ -1,9 +1,9 @@
 
 
 
-import functools,math,sys
+import math,sys
 import numpy as np
-from algorithm.simple._DTable import TableABC
+from algorithm.base._DTable import TableABC
 
 class FixedPointNumber(object):
 

@@ -1,3 +1,6 @@
+# how to install tenseal on macos is a big question
+# local make by c++ socrce file done!
+
 from tenseal import context,SCHEME_TYPE
 from tenseal import ckks_vector
 from tenseal.enc_context import Context

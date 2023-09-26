@@ -1,6 +1,6 @@
 from algorithm.simple.gmpy_math import *
 import random
-from algorithm.simple.fixedpoint import FixedPointNumber
+from algorithm.base.fixedpoint import FixedPointNumber
 
 
 

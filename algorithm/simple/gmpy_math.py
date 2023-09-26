@@ -95,3 +95,5 @@ def is_qrt(n):
 def legendre(a,p):
     return powmod(a,(p-1)//2,p)
 
+def get_rand_state(p):
+    return gmpy2.random_state(hash(p))
