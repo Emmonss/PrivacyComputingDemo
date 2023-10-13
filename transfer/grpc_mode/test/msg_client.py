@@ -1,7 +1,7 @@
 
 import grpc,sys
 
-sys.path.append('/')
+sys.path.append('/Users/peizhengmeng/code/python/PrivacyComputingDemo')
 
 import transfer.grpc_mode.test.pb.msg_pb2_grpc as msg_pb2_grpc
 import transfer.grpc_mode.test.pb.msg_pb2 as msg_pb2

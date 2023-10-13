@@ -1,0 +1,26 @@
+//python -m grpc_tools.protoc --python_out=.  --grpc_python_out=.  -I. grpc_transfer.proto
+syntax = "proto3";
+
+
+service DataTransfer {
+    // 进阶Demo
+    rpc grpcDataRemote (RequestData) returns (ResponseData) {}
+
+    rpc grpcDataGet(RequestData) returns (ResponseData)   {}
+}
+
+message RequestData{
+    bytes bytes_data = 1;
+    string task_id = 2;
+    int32 src_party_id = 3;
+    int32 dst_party_id = 4;
+    string  name = 5;
+}
+
+message ResponseData{
+    int32 code = 1;
+    string message = 2;
+    bytes data =3;
+
+}
+

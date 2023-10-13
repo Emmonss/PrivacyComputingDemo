@@ -1,10 +1,9 @@
 import grpc, sys,time
 
-sys.path.append('/')
+sys.path.append('/Users/peizhengmeng/code/python/PrivacyComputingDemo')
 
 
-import transfer.grpc_mode.test.pb.msg_pb2_grpc as msg_pb2_grpc
-import transfer.grpc_mode.test.pb.msg_pb2 as msg_pb2
+from transfer.grpc_mode.test.pb import msg_pb2_grpc,msg_pb2
 from concurrent import futures
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
