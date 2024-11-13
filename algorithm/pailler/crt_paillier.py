@@ -30,7 +30,7 @@ class PaillierPublicKey(object):
         self.g = n+1
         self.n = n
         self.nsquare = n*n
-        self.max_int = n // 3 -1
+        self.max_int = n // 3 - 1
 
     def apply_obfuscator(self,ciphertext,random_value = None):
         r = random_value or random.SystemRandom().randrange(1,self.n)

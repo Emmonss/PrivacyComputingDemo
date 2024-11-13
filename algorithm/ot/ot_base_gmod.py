@@ -1,9 +1,6 @@
-from pprint import pprint
-from fuctions.ot.base import BaseSender,BaseReceiver
+from algorithm.ot.base import BaseSender
 from algorithm.base.hash import Hash
 from utils.constant_utils import HASH_SHA256
-import random,gmpy2
-import numpy as np
 from algorithm.simple.gmpy_math import *
 
 class Sender(BaseSender):
@@ -23,7 +20,6 @@ class Sender(BaseSender):
     def _get_rnd_c(self,p,g):
         while 1:
             c = get_generation_for_safe_prime(p)
-
             if gmpy2.sign(gmpy2.sub(c,g)) !=0:
                 return c
 
@@ -32,11 +28,20 @@ class Sender(BaseSender):
         while 1:
             rs = get_rand_state(p)
             a = gmpy2.mpz_random(rs,self.bit_len)
-
             if gmpy2.sign(gmpy2.sub(a,0)) >0:
                 return a
 
     def send(self,msg):
-        pass
+        self.clear()
+
+
+    def clear(self):
+        self.C_list.clear()
+        self.g_list.clear()
+        self.p_list.clear()
+        self.a_list.clear()
+        self.ga_list.clear()
+        self.ca_list.clear()
+        self.ca1_list.clear()
 
 

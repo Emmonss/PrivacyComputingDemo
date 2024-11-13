@@ -3,6 +3,7 @@
 
 import pickle,os,sys
 from utils.constant_utils import PICKLE_VERSION,ABS_PROJECT_PATH
+from utils.constant_utils import HTTP_SUPPORT_PROTOCOLS
 from typing import Union
 
 
@@ -12,6 +13,12 @@ def check_port(port: Union[int,str]):
 
     if not 0< int(port) <= 65535:
         raise ValueError(f"port:{port} is invalid")
+
+
+def _check_protocol(protocol: str):
+    if protocol not in HTTP_SUPPORT_PROTOCOLS:
+        raise ValueError(f"{protocol} not supported")
+
 
 def write_bytes_to_file(data,filename):
     with open(filename,"wb") as f:

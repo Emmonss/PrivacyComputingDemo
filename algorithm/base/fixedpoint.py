@@ -3,6 +3,8 @@
 
 import math,sys
 import numpy as np
+from gmpy2 import gmpy2
+
 from algorithm.base._DTable import TableABC
 
 class FixedPointNumber(object):
@@ -49,7 +51,7 @@ class FixedPointNumber(object):
 
         if precision is None:
             if isinstance(scalar,int) or isinstance(scalar,np.int16) or \
-                isinstance(scalar,np.int32) or isinstance(scalar,np.int64):
+                isinstance(scalar,np.int32) or isinstance(scalar,np.int64) or isinstance(scalar, gmpy2.mpz):
                 exponent=0
             elif isinstance(scalar,float) or isinstance(scalar,np.float16) or \
                 isinstance(scalar,np.float32) or isinstance(scalar,np.float64):
