@@ -23,7 +23,7 @@ from google.protobuf import json_format
 import spu.libspu.link as link
 import spu.psi as psi
 
-from algorithm.psi.spu_utils import create_link_desc, wc_count
+from algorithm.psi.spu.spu_utils import create_link_desc, wc_count
 
 
 class UnitTests(unittest.TestCase):
@@ -64,7 +64,7 @@ class UnitTests(unittest.TestCase):
         '''
 
         with open(
-            f"./output/spu_test_pir_server_secret_key.bin", 'wb'
+                f"output/spu_test_pir_server_secret_key.bin", 'wb'
         ) as f:
             f.write(
                 bytes.fromhex(
@@ -103,7 +103,7 @@ class UnitTests(unittest.TestCase):
                                 xxx
                                 '''
 
-        with open(f"./output/spu_test_pir_pir_client.csv", 'w') as f:
+        with open(f"output/spu_test_pir_pir_client.csv", 'w') as f:
             f.write(pir_client_input_content)
 
         configs = [
@@ -122,7 +122,7 @@ class UnitTests(unittest.TestCase):
         for job in jobs:
             job.join()
             self.assertEqual(job.exitcode, 0)
-        self.assertEqual(wc_count("./output/spu_test_pir_pir_output.csv"), 4)
+        self.assertEqual(wc_count("spu/output/spu_test_pir_pir_output.csv"), 4)
 
 
 if __name__ == '__main__':

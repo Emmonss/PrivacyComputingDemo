@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+
+
+service TransferService {
+
+  rpc send_data(Data) returns (Response);
+
+  rpc send_data_stream(stream DataList) returns (Response);
+
+  rpc send_data_file_stream(stream FileData) returns (Response);
+}
+
+
+
+message DataStr{
+  string str = 1;
+}
+
+message Data {
+  string id=1;
+  string src = 2;
+  string dst = 3;
+  bytes data = 4;
+}
+
+message Response{
+  string content = 1;
+}
+message DataList{
+  repeated string data=1;
+}
+
+message FileData{
+  string id =1;
+  string file_name=2;
+  bytes data=3;
+}
+
+

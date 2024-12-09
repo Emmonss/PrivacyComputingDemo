@@ -1,13 +1,10 @@
-"""
-@Time : 2024/4/21 18:19
-@Auth ： yeqc
-"""
+
 
 import random
 from decimal import Decimal
+from algorithm.simple.gmpy_math import *
 
-FIELD_SIZE = 10 ** 2
-MOD = 9999999987
+
 
 
 def coeff(t, secret):
@@ -52,23 +49,20 @@ def reconstruct_secret(shares):
     """
     利用拉格朗日插值法（已知m个秘密)还原并得到secret(f(0))
     """
-    sums = 0
+    sums = mpz(0)
 
     for j, share_j in enumerate(shares):
         xj, yj = share_j
-        prod = Decimal(1)
+        prod = mpz(1)
 
         for i, share_i in enumerate(shares):
             xi, _ = share_i
             if i != j:
-                # print(Decimal(Decimal(xi) / (xi - xj)))
-                prod *= Decimal(Decimal(xi) / (xi - xj))
-        # print(yj)
-        prod *= yj
-        sums += Decimal(prod)
-    print(sums)
+                prod = mul(prod, div(xi, sub(xi,xj)))
+        prod = mul(prod,yj)
+        sums = add(sums,prod)
 
-    return int(round(Decimal(sums), 0))
+    return int(round(sums, 0))
 
 
 def multiply_shares(shares1, shares2):
@@ -79,30 +73,91 @@ def multiply_shares(shares1, shares2):
     for (x1, y1), (x2, y2) in zip(shares1, shares2):
         if x1 != x2:
             raise ValueError("Shares must have the same x value.")
-        multiplied_shares.append((x1, (y1 * y2) % MOD))
+        multiplied_shares.append((x1, mod(mul(y1,y2) ,MOD)))
     return multiplied_shares
 
 
-# Driver code
+def ss_shamir_mul(host_data_share,guest_data_share):
+    host_data_share_0, host_data_share_1 = host_data_share[:t // 2], host_data_share[t //2: t]
+    guest_data_0, guest_data_1 = guest_data_share[:t // 2], guest_data_share[t // 2: t]
+
+    print("host_data_share_0", host_data_share_0)
+    print("host_data_share_1", host_data_share_1)
+
+    print("guest_data_0", guest_data_0)
+    print("guest_data_1", guest_data_1)
+
+
 if __name__ == '__main__':
-    # (3,5) sharing scheme
-    t, n = 3, 5
-    secret1 = 10
-    secret2 = 111
+    FIELD_SIZE = 20
+    import gmpy2
 
-    # 设置相同tuple(x,y)中的x
+    # MOD = 9999999987
+    MOD = get_safe_prime(512)
+    print(f"mod{MOD}")
+
+    #
+    p_len = 64
+    d_len = 13
+    t = 8
+    n = 16
+
+    # FIELD_SIZE = 10 ** 2
+
+
+    host_data = get_random_big_num(d_len)
+    guest_data = get_random_big_num(d_len)
+
+    # host_data = 10
+    # guest_data = 111
+    print("host_data:{}".format(host_data))
+    print("guest_data:{}".format(guest_data))
+    print("host_data+guest_data:{}".format(add(host_data, guest_data)))
+    print("host_data*guest_data:{}".format(mul(host_data, guest_data)))
+
+    # x 是共享的
     x = random.sample(range(0, FIELD_SIZE), n)
+    print("x:{}".format(x))
+
+
+    print("make share".center(100, '='))
     # 秘密共享
-    shares1 = generate_shares(n, t, secret1, x)
-    shares2 = generate_shares(n, t, secret2, x)
+    host_data_share = generate_shares(n, t, host_data, x)
+    guest_data_share = generate_shares(n, t, guest_data, x)
+    print("host_data_share:{}".format(host_data_share))
+    print("guest_data_share:{}".format(guest_data_share))
 
-    print("Shares for Secret1:", shares1)
-    print("Shares for Secret2:", shares2)
+    host1 = reconstruct_secret(host_data_share)
+    print("host_data_share all:", host1)
+    guest1 = reconstruct_secret(guest_data_share)
+    print("host_data_share all :", guest1)
 
-    # 秘密份额相乘
-    multiplied_shares = multiply_shares(shares1, shares2)
+    host1 = reconstruct_secret(host_data_share[:t])
+    print("host_data_share t:", host1)
+    guest1 = reconstruct_secret(guest_data_share[:t])
+    print("host_data_share t:", guest1)
+
+    host1 = reconstruct_secret(host_data_share[:t-2])
+    print("host_data_share t-1:", host1)
+    guest1 = reconstruct_secret(guest_data_share[:t-2])
+    print("host_data_share t-1:", guest1)
+    #
+    # print("mul".center(100, '='))
+    # ss_shamir_mul(host_data_share, guest_data_share)
+
+    #
+    # # print("Shares for Secret1:", host_data_share)
+    # # print("Shares for Secret2:", guest_data_share)
+    # # #
+    # # # 秘密份额相乘
+    multiplied_shares = multiply_shares(host_data_share, guest_data_share)
     print("Multiplied Shares:", multiplied_shares)
 
-    # 秘密份额相乘实现秘密相乘
+    # # 秘密份额相乘实现秘密相乘
     reconstructed_secret = reconstruct_secret(multiplied_shares)
     print("Reconstructed Secret:", reconstructed_secret)
+    reconstructed_secret = reconstruct_secret(multiplied_shares[:t])
+    print("Reconstructed Secret:", reconstructed_secret)
+    reconstructed_secret = reconstruct_secret(multiplied_shares[:t//2])
+    print("Reconstructed Secret:", reconstructed_secret)
+

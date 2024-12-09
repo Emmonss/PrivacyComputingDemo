@@ -1,4 +1,5 @@
-////python -m grpc_tools.protoc --python_out=.  --grpc_python_out=.  -I. msg2.proto
+// 文件位置：helloworld.proto
+
 syntax = "proto3";
 
 package helloworld;
@@ -21,6 +22,7 @@ message GetDeptUserResponse {
     repeated BasicUser user_list = 1; // 用户列表
     map<uint32, BasicUser> user_map = 2; // 用户哈希表
 }
+
 // 用户基本信息
 message BasicUser {
     uint32 id = 1;

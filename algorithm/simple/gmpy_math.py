@@ -1,7 +1,6 @@
 import random
 import gmpy2
 
-
 '''
     basic fuctions
 '''
@@ -29,6 +28,8 @@ def powmod(a,b,n):
 def gcd(a,b):
     return int(gmpy2.gcd(a,b))
 
+def divm(a,b,n):
+    return gmpy2.divm(a,b,n)
 
 '''
     prime fuctions

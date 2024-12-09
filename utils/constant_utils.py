@@ -38,7 +38,7 @@ HASH_SM3 = 'sm3'
 HASH_NONE = 'none'
 
 
-#grpc
+#proto
 GRPC_PORT = 50004
 
 if __name__ == '__main__':

@@ -8,22 +8,22 @@ from utils.constant_utils import HASH_NONE,HASH_SHA224,HASH_SHA256,HASH_SHA384,H
 
 
 def compute_md5(value):
-    return hashlib.md5(bytes(value, encodings='utf-8')).hexdigest()
+    return hashlib.md5(bytes(value, encoding='utf-8')).hexdigest()
 
 def compute_sha256(value):
-    return hashlib.sha256(bytes(value, encodings='utf-8')).hexdigest()
+    return hashlib.sha256(bytes(value, encoding='utf-8')).hexdigest()
 
 def compute_sha1(value):
-    return hashlib.sha1(bytes(value, encodings='utf-8')).hexdigest()
+    return hashlib.sha1(bytes(value, encoding='utf-8')).hexdigest()
 
 def compute_sha224(value):
-    return hashlib.sha224(bytes(value, encodings='utf-8')).hexdigest()
+    return hashlib.sha224(bytes(value, encoding='utf-8')).hexdigest()
 
 def compute_sha512(value):
-    return hashlib.sha512(bytes(value, encodings='utf-8')).hexdigest()
+    return hashlib.sha512(bytes(value, encoding='utf-8')).hexdigest()
 
 def compute_sha384(value):
-    return hashlib.md5(bytes(value, encodings='utf-8')).hexdigest()
+    return hashlib.md5(bytes(value, encoding='utf-8')).hexdigest()
 
 HASH_CLASS = {
     'none': lambda x = '':str(x),

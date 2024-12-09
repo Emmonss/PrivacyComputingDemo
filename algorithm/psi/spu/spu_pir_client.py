@@ -2,7 +2,7 @@ import json
 from google.protobuf import json_format
 import spu.libspu.link as link
 import spu.psi as psi
-from algorithm.psi.spu_utils import create_link_by_port
+from algorithm.psi.spu.spu_utils import create_link_by_port
 
 
 
@@ -33,7 +33,7 @@ client_online_config = f'''
         }}
 '''
 
-test_path = "./output/client/spu_test_pir_pir_client.csv"
+test_path = "output/client/spu_test_pir_pir_client.csv"
 id = 1710312463672
 port_list= [57449,52610]
 

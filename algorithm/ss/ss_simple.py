@@ -100,8 +100,8 @@ def ss_mul_demo(host_set,guest_set):
 
     z_all = add(z_0,z_1)
 
-    print(f"a_0:{a_0} b_0:{b_0} c_0:{c_0}")
-    print(f"a_0:{a_1} b_0:{b_1} c_0:{c_1}")
+    # print(f"a_0:{a_0} b_0:{b_0} c_0:{c_0}")
+    # print(f"a_0:{a_1} b_0:{b_1} c_0:{c_1}")
     print("e_0:{};e_1:{}".format(e_0, e_1))
     print("f_0:{};f_1:{}".format(f_0, f_1))
     print("e:{};f:{}".format(e, f))
@@ -133,6 +133,7 @@ if __name__ == '__main__':
 
     print("mul".center(100,'='))
     ss_mul_demo(host_data_set, guest_data_set)
+
     # # print(add(host_data_0, host_data_1))
     # print("share add".center(100,'='))
     # join_0 = add(host_data_0,guest_data_0)

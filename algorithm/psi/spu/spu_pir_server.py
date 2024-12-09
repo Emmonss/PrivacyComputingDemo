@@ -1,11 +1,9 @@
 import json
 import os
-from tempfile import TemporaryDirectory
 from google.protobuf import json_format
 import spu.libspu.link as link
 import spu.psi as psi
-import multiprocess
-from algorithm.psi.spu_utils import create_link_desc, wc_count, create_link_by_port
+from algorithm.psi.spu.spu_utils import create_link_by_port
 
 
 
@@ -76,7 +74,7 @@ port_list = [57449,52610]
 key_value = "000102030405060708090a0b0c0d0e0ff0e0d0c0b0a090807060504030201000"
 
 if __name__ == '__main__':
-    make_oprf_key(key_value, './output/server')
+    make_oprf_key(key_value, 'output/server')
     link_desc = create_link_by_port(id, port_list)
     pir_server(server_setup_config, server_online_config, link_desc, 0)
     pass

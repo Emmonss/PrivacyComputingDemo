@@ -52,10 +52,10 @@ key_value = "000102030405060708090a0b0c0d0e0ff0e0d0c0b0a090807060504030201000"
 if __name__ == '__main__':
     link_desc = create_link_by_port(id, port_list)
     #key
-    make_oprf_key(key_value, './output/server')
+    make_oprf_key(key_value, 'output/server')
 
     #test data
-    test_path = "./output/client/spu_test_pir_pir_client.csv"
+    test_path = "output/client/spu_test_pir_pir_client.csv"
     make_query_csv(test_path)
 
 
