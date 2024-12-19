@@ -94,7 +94,7 @@ class Host:
             res.append(enc_h)
             res_dict[enc_h] = data[index]
         self.flat_dict = res_dict
-        # pprint(self.flat_dict)
+        pprint(self.flat_dict)
         return res
 
     def calculate_enc_g(self,enc_g:list[gmpy2.mpz]):
@@ -155,7 +155,7 @@ if __name__ == '__main__':
     print("host compute enc_h".center(60, '+'))
     enc_h = host.calculate_enc_h(host_data)
     print(f"enc_h size:{len(enc_h)}")
-    # pprint(enc_h)
+    pprint(enc_h)
 
     print("host compute enc_g from guest".center(60, '+'))
     enc_g = host.calculate_enc_g(enc_g)
@@ -165,12 +165,12 @@ if __name__ == '__main__':
     print("guest compute enc_g from host".center(60, '='))
     enc_g2 = guest.calculate_enc_g_from_host(enc_g)
     print(f"enc_g size:{len(enc_g2)}")
-    # pprint(enc_g2)
+    pprint(enc_g2)
 
-    print("host get intersection by eng_g and enc_h".center(60, '+'))
-    psi_result = host.calculate_intersecttion(enc_g2, enc_h)
-    print(f"psi_result size:{len(psi_result)}")
-    pprint(psi_result)
+    # print("host get intersection by eng_g and enc_h".center(60, '+'))
+    # psi_result = host.calculate_intersecttion(enc_g2, enc_h)
+    # print(f"psi_result size:{len(psi_result)}")
+    # pprint(psi_result)
 
     host.clear()
     guest.clear()

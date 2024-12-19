@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+
+
+service TransferService {
+  rpc send(Data) returns (Response);
+}
+
+message Data {
+  string user = 1;
+  string score = 2;
+}
+
+message Response{
+  string code = 1;
+  string data = 2;
+}
+
+
+
