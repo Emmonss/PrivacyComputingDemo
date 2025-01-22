@@ -35,6 +35,18 @@ def divm(a,b,n):
     prime fuctions
 '''
 
+def sign(x):
+    '''
+    sign(x) -> number
+    Return -1 if x < 0, 0 if x == 0, or +1 if x >0.
+    '''
+    return gmpy2.sign(x)
+
+def mpz_rrandomb(rs,bitcom):
+    return gmpy2.mpz_rrandomb(rs,bitcom )
+
+def mpz_random(rs,p_int):
+    return gmpy2.mpz_random(rs,p_int)
 
 def invert(a,b):
     '''
@@ -79,7 +91,7 @@ def get_generation_for_safe_prime(p):
     if p == 2:
         return 1
     p1 = 2
-    p2 = (p-1)//p
+    p2 = (p-1)//p1
     while 1:
         g = random.randint(2,p-1)
         if powmod(g,(p-1)//p1,p) !=1 and powmod(g,(p-1)//p2,p) !=1:

@@ -1,7 +1,6 @@
 
 
 import hashlib
-# import libsm3py
 
 
 from utils.constant_utils import HASH_NONE,HASH_SHA224,HASH_SHA256,HASH_SHA384,HASH_SHA512,HASH_SHA1,HASH_MD5

@@ -6,8 +6,9 @@ class BaseSender:
     def __init__(self):
         self.role = 'sender'
 
+
     @abstractmethod
-    def send(self,msg):
+    def send(self, msg):
         pass
 
 class BaseReceiver:
