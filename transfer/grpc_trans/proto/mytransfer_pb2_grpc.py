@@ -39,14 +39,9 @@ class TransferServiceStub(object):
                 request_serializer=mytransfer__pb2.Data.SerializeToString,
                 response_deserializer=mytransfer__pb2.Response.FromString,
                 _registered_method=True)
-        self.send_data_stream = channel.stream_unary(
-                '/TransferService/send_data_stream',
-                request_serializer=mytransfer__pb2.DataList.SerializeToString,
-                response_deserializer=mytransfer__pb2.Response.FromString,
-                _registered_method=True)
-        self.send_data_file_stream = channel.stream_unary(
-                '/TransferService/send_data_file_stream',
-                request_serializer=mytransfer__pb2.FileData.SerializeToString,
+        self.get_data = channel.unary_unary(
+                '/TransferService/get_data',
+                request_serializer=mytransfer__pb2.GetData.SerializeToString,
                 response_deserializer=mytransfer__pb2.Response.FromString,
                 _registered_method=True)
 
@@ -60,14 +55,9 @@ class TransferServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def send_data_stream(self, request_iterator, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def send_data_file_stream(self, request_iterator, context):
-        """Missing associated documentation comment in .proto file."""
+    def get_data(self, request, context):
+        """rpc send_data_stream(stream DataList) returns (Response);
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -80,14 +70,9 @@ def add_TransferServiceServicer_to_server(servicer, server):
                     request_deserializer=mytransfer__pb2.Data.FromString,
                     response_serializer=mytransfer__pb2.Response.SerializeToString,
             ),
-            'send_data_stream': grpc.stream_unary_rpc_method_handler(
-                    servicer.send_data_stream,
-                    request_deserializer=mytransfer__pb2.DataList.FromString,
-                    response_serializer=mytransfer__pb2.Response.SerializeToString,
-            ),
-            'send_data_file_stream': grpc.stream_unary_rpc_method_handler(
-                    servicer.send_data_file_stream,
-                    request_deserializer=mytransfer__pb2.FileData.FromString,
+            'get_data': grpc.unary_unary_rpc_method_handler(
+                    servicer.get_data,
+                    request_deserializer=mytransfer__pb2.GetData.FromString,
                     response_serializer=mytransfer__pb2.Response.SerializeToString,
             ),
     }
@@ -129,7 +114,7 @@ class TransferService(object):
             _registered_method=True)
 
     @staticmethod
-    def send_data_stream(request_iterator,
+    def get_data(request,
             target,
             options=(),
             channel_credentials=None,
@@ -139,38 +124,11 @@ class TransferService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.stream_unary(
-            request_iterator,
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            '/TransferService/send_data_stream',
-            mytransfer__pb2.DataList.SerializeToString,
-            mytransfer__pb2.Response.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def send_data_file_stream(request_iterator,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.stream_unary(
-            request_iterator,
-            target,
-            '/TransferService/send_data_file_stream',
-            mytransfer__pb2.FileData.SerializeToString,
+            '/TransferService/get_data',
+            mytransfer__pb2.GetData.SerializeToString,
             mytransfer__pb2.Response.FromString,
             options,
             channel_credentials,

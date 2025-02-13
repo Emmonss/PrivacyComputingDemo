@@ -1,0 +1,7 @@
+syntax = "proto3";
+package proto;
+message param {
+    optional  string name = 1;
+    optional  string value = 2;
+    optional  string descibe = 3;
+}

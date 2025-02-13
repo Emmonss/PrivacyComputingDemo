@@ -6,16 +6,19 @@ service TransferService {
 
   rpc send_data(Data) returns (Response);
 
-  rpc send_data_stream(stream DataList) returns (Response);
+  rpc get_data(GetData) returns(Response);
+//  rpc send_data_stream(stream DataList) returns (Response);
 
-  rpc send_data_file_stream(stream FileData) returns (Response);
+//  rpc send_data_file_stream(stream FileData) returns (Response);
 }
 
 
-
-message DataStr{
-  string str = 1;
+message GetData {
+  string id=1;
+  string src = 2;
+  string dst = 3;
 }
+
 
 message Data {
   string id=1;
@@ -25,16 +28,18 @@ message Data {
 }
 
 message Response{
-  string content = 1;
+  string code = 1;
+  string message = 2;
+  bytes data = 3;
 }
-message DataList{
-  repeated string data=1;
-}
-
-message FileData{
-  string id =1;
-  string file_name=2;
-  bytes data=3;
-}
+//message DataList{
+//  repeated string data=1;
+//}
+//
+//message FileData{
+//  string id =1;
+//  string file_name=2;
+//  bytes data=3;
+//}
 
 
