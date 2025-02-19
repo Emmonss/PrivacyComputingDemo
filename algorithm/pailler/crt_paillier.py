@@ -61,7 +61,7 @@ class PaillierPublicKey(object):
         encryptednumber = PaillierEncryptNumber(self,ciphertext,encoding.exponent)
         if random_value is None:
             encryptednumber.apply_obfuscator()
-        return  encryptednumber
+        return encryptednumber
 
 
     def __repr__(self):
@@ -277,9 +277,9 @@ class PaillierEncryptNumber(object):
 
 
 if __name__ == '__main__':
-    pk,sk = PaillierKeyPair.generate_keypair(n_length=32)
+    pk,sk = PaillierKeyPair.generate_keypair(n_length=128)
 
-    s1 = 3
+    s1 = 123
     s2 = 6
     m1 = pk.encrypt(s1)
     m2 = pk.encrypt(s2)
@@ -288,22 +288,25 @@ if __name__ == '__main__':
 
     print(m1.ciphertext(False))
     print(m2.ciphertext(False))
-
+    #
+    print(m1.exponent)
+    print(m2.exponent)
+    m11 = PaillierEncryptNumber(public_key=pk,ciphertext=m1.ciphertext(False),exponent=m1.exponent)
     print("plus")
-    m3 = m1.add_encryptnumber(m2)
+    m3 = m11.add_encryptnumber(m2)
     print(m3.ciphertext(False))
     s3 = sk.decrypt(m3)
     print(s3)
-
-    print("add")
-    m4 = m1.add_scalar(3)
-    s4 = sk.decrypt(m4)
-    print(s4)
-
-    print("mul")
-    m4 = m1.mul_scalar(4)
-    s4 = sk.decrypt(m4)
-    print(s4)
+    #
+    # print("add")
+    # m4 = m1.add_scalar(3)
+    # s4 = sk.decrypt(m4)
+    # print(s4)
+    #
+    # print("mul")
+    # m4 = m1.mul_scalar(4)
+    # s4 = sk.decrypt(m4)
+    # print(s4)
 
 
     pass
