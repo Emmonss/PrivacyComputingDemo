@@ -260,7 +260,7 @@ class PaillierEncryptNumber(object):
                                          self.public_key.n,
                                          self.public_key.max_int)
         plaintext = encode.encoding
-
+        print(f"pp:{plaintext}")
         if plaintext<0 or plaintext>=self.public_key.max_int:
             raise ValueError("scalar out of bounds")
         if plaintext >= self.public_key.n - self.public_key.max_int:
@@ -297,6 +297,10 @@ if __name__ == '__main__':
     print(m3.ciphertext(False))
     s3 = sk.decrypt(m3)
     print(s3)
+
+    m4 = m1+m2
+    s4 = sk.decrypt(m4)
+    print(s4)
     #
     # print("add")
     # m4 = m1.add_scalar(3)
