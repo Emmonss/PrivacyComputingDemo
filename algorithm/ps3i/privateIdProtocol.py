@@ -186,12 +186,12 @@ if __name__ == '__main__':
 
     print('partC merge self and insec data'.center(50, '='))
     pc_data_final_df = pc.merge_final(pc_shuffle_data,pc_data_final,pc_noinsec_data_final)
-    # print(pc_data_final_df)
+    print(pc_data_final_df)
     pc_data_final_df.to_csv('./data/pc_data_test.csv',index=False)
 
     print('partP merge self and insec data'.center(50, '='))
     pp_data_final_df = pp.merge_final(pp_shuffle_data, pp_data_final, pp_noinsec_data_final)
-    # print(pp_data_final)
+    print(pp_data_final)
     pp_data_final_df.to_csv('./data/pp_data_test.csv',index=False)
 
     #
