@@ -40,13 +40,13 @@ def get_brave_triple(n=32,p_len = 1024):
     c = add(c_0, c_1)
 
 
-    print("a1:{}, b1:{}".format(a_1, b_1))
-    print("a0:{}, b0:{}".format(a_0,b_0))
-    print("c0:{}, c1:{}".format(c_0, c_1))
-    print("a=a0+a1:{}".format(a))
-    print("b=b0+b1:{}".format(b))
-    print("c=c0+c1:{}".format(c))
-    print("a*b:{}".format(mul(a,b)))
+    # print("a1:{}, b1:{}".format(a_1, b_1))
+    # print("a0:{}, b0:{}".format(a_0,b_0))
+    # print("c0:{}, c1:{}".format(c_0, c_1))
+    # print("a=a0+a1:{}".format(a))
+    # print("b=b0+b1:{}".format(b))
+    # print("c=c0+c1:{}".format(c))
+    # print("a*b:{}".format(mul(a,b)))
     #a0_enc b0_enc transmit to host_2
 
     return (a_0,b_0,c_0), (a_1,b_1,c_1)
@@ -61,9 +61,9 @@ def ss_add_demo(host_set,guest_set):
 
     host_guset_add = add(host_gest_1,host_gest_0)
 
-    print("host_gest_0:{}".format(host_gest_0))
-    print("host_gest_1:{}".format(host_gest_1))
-    print("host_guset_add result :{}".format(host_guset_add))
+    # print("host_gest_0:{}".format(host_gest_0))
+    # print("host_gest_1:{}".format(host_gest_1))
+    # print("host_guset_add result :{}".format(host_guset_add))
 
     return host_guset_add
 
@@ -111,6 +111,51 @@ def ss_mul_demo(host_set,guest_set):
     print("z_all:{}".format(z_all))
 
 
+def ss_mul(host_data,guest_data,p_len=64):
+    host_set = generate_share(host_data, p_len)
+    # print(f"host_data,{host_data_set}")
+    guest_set = generate_share(guest_data, p_len)
+    # print(f"guest_data,{guest_data_set}")
+
+    host_data_0, host_data_1 = host_set
+    guest_data_0, guest_data_1 = guest_set
+
+    triple_0, triple_1 = get_brave_triple()
+
+    a_0,b_0,c_0 = triple_0
+    a_1,b_1,c_1 = triple_1
+
+    e_0 = (host_data_0, sub(0,a_0))
+    e_1 = (host_data_1,sub(0,a_1))
+    e = ss_add_demo(e_0,e_1)
+
+    f_0 = (guest_data_0,sub(0,b_0))
+    f_1 = (guest_data_1, sub(0, b_1))
+    f = ss_add_demo(f_0,f_1)
+
+
+    z_0_1 = mul(f, a_0)
+    z_0_2 = mul(e, b_0)
+    z_0 = add(add(z_0_1, z_0_2), c_0)
+
+    z_1_1 = mul(e,f)
+    z_1_2 = mul(f, a_1)
+    z_1_3 = mul(e, b_1)
+    z_1 = add(add(add(z_1_1,z_1_2),z_1_3),c_1)
+
+
+    z_all = add(z_0,z_1)
+    print(f"{z_0},{z_1},{z_all}")
+    return z_0,z_1
+
+
+
+if __name__ == '__main__':
+    host_data=0
+    guest_data=0
+    p_len = 64
+
+    z_0,z_1 = ss_mul(host_data,guest_data,p_len)
 if __name__ == '__main__':
     d_len=16
     host_data = get_random_big_num(d_len)

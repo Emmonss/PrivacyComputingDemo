@@ -182,8 +182,8 @@ class PaillierEncryptNumber(object):
                                          self.public_key.n,
                                          self.public_key.max_int,
                                          max_exponent=self.exponent)
-        print(encode.n)
-        print(self.public_key.n)
+        # print(encode.n)
+        # print(self.public_key.n)
         return self.__add_fixpointnumber(encode)
 
 
@@ -260,7 +260,7 @@ class PaillierEncryptNumber(object):
                                          self.public_key.n,
                                          self.public_key.max_int)
         plaintext = encode.encoding
-        print(f"pp:{plaintext}")
+        # print(f"pp:{plaintext}")
         if plaintext<0 or plaintext>=self.public_key.max_int:
             raise ValueError("scalar out of bounds")
         if plaintext >= self.public_key.n - self.public_key.max_int:

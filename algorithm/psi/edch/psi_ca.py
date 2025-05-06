@@ -1,3 +1,5 @@
+import gmpy2
+
 from algorithm.ecc.ecc_utils import generate_key,key_2_bytes,bytes_2_key,point_2_bytes,bytes_2_point
 from algorithm.base.hash import compute_sha256
 from algorithm.simple.gmpy_math import mpz
@@ -11,6 +13,8 @@ curve="ed25519"
 
 def ser_point(data:EccPoint):
     return point_2_bytes(data).hex()
+def ser_point2(data:EccPoint):
+    return point_2_bytes(data)
 
 def add_curve(data:str, pk:EccKey):
     hash_data = compute_sha256(data)
@@ -32,6 +36,8 @@ def add_curve_list(data:list[str], pk:EccKey):
 if __name__ == '__main__':
     host_data = ['fuck1','fuck2','fuck3']
     guest_data = ['fuck2','fuck3','fuck4']
+    print(f"host方原始数据：{host_data}")
+    print(f"guest方原始数据：{guest_data}")
 
     print("生成双方的椭圆曲线密钥{host_sk, host_pk}和{guest_sk, guest_pk}")
     host_sk, host_pk = generate_key(curve=curve)
@@ -39,6 +45,8 @@ if __name__ == '__main__':
 
     print("guest方将数据映射到椭圆曲线上并用guest_pk加密，结果如下".center(100,'='))
     guest_curve_result = add_curve_list(guest_data, guest_pk)
+    print(ser_point2(guest_curve_result[0]))
+    print(len(ser_point2(guest_curve_result[0]))*4)
     pprint([ser_point(item) for item in guest_curve_result])
     #
     print("host方将数据映射到椭圆曲线上并用host_pk加密，结果如下".center(100,'='))

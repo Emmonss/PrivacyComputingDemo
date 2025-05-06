@@ -43,7 +43,7 @@ class SecureComparator:
 
         # 重构差值（模拟安全计算）
         d = (shares_d[0] + shares_d[1]) % self.p
-
+        # print(d)
         # 判断差值是否为0
         is_zero = self._validate_non_zero(d)
         return self.share(1) if is_zero else self.share(0)
